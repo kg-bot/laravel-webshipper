@@ -11,7 +11,8 @@
   "require": {
     "php": ">=7.1",
     "laravel/framework": "^5.5",
-    "guzzlehttp/guzzle": "^6.3.3"
+    "guzzlehttp/guzzle": "^6.3.3",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
