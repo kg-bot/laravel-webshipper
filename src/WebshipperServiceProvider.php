@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: danijel
- * Date: 9/6/18
- * Time: 12:22 PM
- */
 
 namespace Webshipper;
 

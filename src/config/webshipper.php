@@ -1,7 +1,5 @@
 <?php
 
 return [
-    'account_name'     => env( 'WEBSHIPPER_ACCOUNT_NAME' ),
-    'account_email'    => env( 'WEBSHIPPER_EMAIL' ),
-    'account_password' => env( 'WEBSHIPPER_PASSWORD' ),
+    'webshipper_api_token' => env( 'WEBSHIPPER_API_TOKEN' ),
 ];

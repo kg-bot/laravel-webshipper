@@ -2,54 +2,45 @@
 namespace Webshipper\Util;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\RequestOptions;
 
 class Request
 {
     protected $httpClient;
-    protected $apiUrl = ".api.webshipper.io/v2/";
+    protected $apiUrl = "https://portal.webshipr.com/webservice/v1/";
     protected $apiToken;
-    protected $accountName;
-    protected $email;
-    protected $password;
 
-    public function __construct( $accountName = null, $email = null, $password = null)
+    public function __construct($apiToken = null)
     {
+        $this->apiToken = $apiToken ?? config( 'webshipper.webshipper_api_token' );
         $this->httpClient = new Client();
-        $this->accountName = $accountName ?? config('webshipper.account_name');
-        $this->email = $email ?? config( 'webshipper.account_email' );
-        $this->password = $password ?? config( 'webshipper.account_password' );
-    }
-
-    public function authorize()
-    {
-        $authorizationUrl = "https://". $this->accountName . $this->apiUrl . "oauth/token?grant_type=password&username=" . $this->email . "&password=" . $this->password;
-        try {
-            $response = $this->httpClient->post($authorizationUrl);
-            $responseBody = json_decode($response->getBody());
-            $this->setApiToken($responseBody->access_token);
-        } catch(ClientException $exception) {
-            echo $exception->getMessage();
-        }
     }
 
     public function get($url)
     {
-        $this->authorize();
-        $response = $this->httpClient->get("https://" . $this->accountName . $this->apiUrl . $url, $this->getAuthorizationHeader());
-        $body = json_encode($response->getBody());
+        $response = $this->httpClient->get($this->apiUrl . $url, $this->getRequestHeaders());
+        $body = json_decode($response->getBody());
         return $body;
     }
 
-    public function post($url)
+    public function post($url, $data)
     {
-        $this->authorize();
-        $this->httpClient->post($this->apiUrl . $url);
+        return $this->httpClient->post($this->apiUrl . $url, array_merge([RequestOptions::JSON => $data], $this->getRequestHeaders()));
     }
 
-    public function setApiToken($apiToken)
+    public function patch($url, $data)
     {
-        $this->apiToken = $apiToken;
+        return $this->httpClient->patch($this->apiUrl . $url, array_merge([RequestOptions::JSON => $data], $this->getRequestHeaders()));
+    }
+
+    public function patchWithoutData($url)
+    {
+        return $this->httpClient->patch($this->apiUrl . $url, $this->getRequestHeaders());
+    }
+
+    public function delete($url)
+    {
+        return $this->httpClient->delete($this->apiUrl . $url, $this->getRequestHeaders());
     }
 
     public function getApiToken()
@@ -57,10 +48,8 @@ class Request
         return $this->apiToken;
     }
 
-    private function getAuthorizationHeader()
+    private function getRequestHeaders()
     {
-        return [
-            'headers' => ['Authorization' => 'Bearer ' . $this->getApiToken()]
-        ];
+        return ['headers' => ['X-WS-Token' => $this->getApiToken(), 'Content-Type' => 'application/json']];
     }
 }
