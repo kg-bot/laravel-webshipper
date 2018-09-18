@@ -3,11 +3,11 @@
 namespace Webshipper\V2\Model;
 
 
-class Order extends Model
+class Shipment extends Model
 {
 
-    protected $name = "orders";
-    protected $url = "orders";
+    protected $name = "shipments";
+    protected $url = "shipments";
 
     public function __construct()
     {
