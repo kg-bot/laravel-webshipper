@@ -1,6 +1,8 @@
 # Laravel webshipper integration
-# laravel-webshipper
-
+This plugin provides a laravel wrapper for webshipper api.  
+Webshipper at this point uses 2 versions of api. V1 api uses its own classes while V2 uses different classes  
+Usage of any of it is based on the classes you use so it can be used as pleased
+# laravel-webshipper v1
 
 ### Creating and using webshipper api:
 To instantiate and create api instance  
@@ -197,3 +199,5 @@ $this->api->orders-find($id)
 ```angular2html
 $this->api->orders-delete($id)
 ```
+
+# laravel-webshipper v2
