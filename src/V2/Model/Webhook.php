@@ -5,6 +5,7 @@ namespace Webshipper\V2\Model;
 
 class Webhook extends Model
 {
+
     protected $name = "webhooks";
     protected $url = "webhooks";
 
@@ -12,4 +13,5 @@ class Webhook extends Model
     {
         parent::__construct($this->name, $this->url);
     }
+
 }
