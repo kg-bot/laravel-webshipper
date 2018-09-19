@@ -13,7 +13,7 @@ class Model
 
     public function __construct()
     {
-        $this->requestUtil = new Request('sample-company', 'dadodju@gmail.com', 'slobomirp7008');
+        $this->requestUtil = new Request();
     }
 
     public function all()
