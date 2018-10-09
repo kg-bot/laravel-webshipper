@@ -7,6 +7,7 @@ use Webshipper\V2\Model\DropPointLocator;
 use Webshipper\V2\Model\Order;
 use Webshipper\V2\Model\OrderChannel;
 use Webshipper\V2\Model\Webhook;
+use Webshipper\V2\Model\Shipment;
 
 class WebshipperV2
 {
@@ -16,6 +17,7 @@ class WebshipperV2
     public $order_channels;
     public $shipping_rates;
     public $webhooks;
+    public $shipments;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class WebshipperV2
         $this->order_channels = new OrderChannel();
         $this->shipping_rates = new ShippingRate();
         $this->webhooks = new Webhook();
+        $this->shipments = new Shipment();
     }
 
 }
