@@ -11,9 +11,9 @@ class Model
     protected $url;
     protected $requestUtil;
 
-    public function __construct()
+    public function __construct($accountName = null, $email = null, $password = null)
     {
-        $this->requestUtil = new Request();
+        $this->requestUtil = new Request($accountName, $email, $password);
     }
 
     public function all()
