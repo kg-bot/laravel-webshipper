@@ -19,14 +19,14 @@ class WebshipperV2
     public $webhooks;
     public $shipments;
 
-    public function __construct()
+    public function __construct($accountName = null, $email = null, $password = null)
     {
-        $this->orders = new Order();
-        $this->drop_point_locators = new DropPointLocator();
-        $this->order_channels = new OrderChannel();
-        $this->shipping_rates = new ShippingRate();
-        $this->webhooks = new Webhook();
-        $this->shipments = new Shipment();
+        $this->orders = new Order($accountName, $email, $password);
+        $this->drop_point_locators = new DropPointLocator($accountName, $email, $password);
+        $this->order_channels = new OrderChannel($accountName, $email, $password);
+        $this->shipping_rates = new ShippingRate($accountName, $email , $password);
+        $this->webhooks = new Webhook($accountName, $email, $password);
+        $this->shipments = new Shipment($accountName, $email, $password);
     }
 
 }
