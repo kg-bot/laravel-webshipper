@@ -12,7 +12,7 @@ class Request
 
     public function __construct($apiToken = null)
     {
-        $this->apiToken = $apiToken ?? config( 'webshipper.webshipper_api_token' );
+        $this->apiToken = $apiToken ?? \Config::get( 'webshipper.webshipper_api_token' );
         $this->httpClient = new Client();
     }
 
