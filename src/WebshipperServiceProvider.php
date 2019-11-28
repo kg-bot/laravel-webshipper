@@ -2,8 +2,8 @@
 
 namespace Webshipper;
 
-
 use Illuminate\Support\ServiceProvider;
+
 class WebshipperServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -22,7 +22,9 @@ class WebshipperServiceProvider extends ServiceProvider
 
         $this->publishes([$configPath => $publishPath], 'config');
     }
+
     public function register()
     {
+
     }
 }
