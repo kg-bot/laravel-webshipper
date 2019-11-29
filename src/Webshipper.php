@@ -3,6 +3,7 @@
 namespace Webshipper;
 
 use Webshipper\Builders\OrderBuilder;
+use Webshipper\Builders\OrderChannelBuilder;
 use Webshipper\Builders\ShipmentBuilder;
 use Webshipper\Builders\ShippingRateBuilder;
 use Webshipper\Builders\WebhookBuilder;
@@ -63,5 +64,13 @@ class Webshipper
     public function webhooks()
     {
         return new WebhookBuilder($this->request);
+    }
+
+    /**
+     * @return OrderChannelBuilder
+     */
+    public function order_channels()
+    {
+        return new OrderChannelBuilder($this->request);
     }
 }
