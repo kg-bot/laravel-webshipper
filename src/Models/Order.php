@@ -42,7 +42,7 @@ class Order extends Model
     public function shipments()
     {
         $builder = new ShippingRateBuilder($this->request);
-        $builder->setEntity('orders/' . $this->{$this->primaryKey} . '/shipments');
+        $builder->setEntity($this->entity.'/' . $this->{$this->primaryKey} . '/shipments');
 
         return $builder->get();
     }
