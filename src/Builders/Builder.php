@@ -111,12 +111,12 @@ class Builder
                 ],
             ];
 
-            if(in_array('relationships', $data)) {
+            if(array_key_exists('relationships', $data)) {
 
                 $request['data']['relationships'] = $data['relationships'];
             }
 
-            if(in_array('attributes', $data)) {
+            if(array_key_exists('attributes', $data)) {
 
                 $request['data']['attributes'] = $data['attributes'];
             }
