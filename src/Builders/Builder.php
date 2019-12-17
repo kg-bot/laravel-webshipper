@@ -105,15 +105,24 @@ class Builder
     {
         return $this->request->handleWithExceptions(function () use ($data) {
 
-            $data = [
+            $request = [
                 'data' => [
                     'type' => $this->type,
-                    'attributes' => $data['attributes'] ?? [],
-                    'relationships' => $data['relationships'] ?? [],
                 ],
             ];
+
+            if(in_array('relationships', $data)) {
+
+                $request['data']['relationships'] = $data['relationships'];
+            }
+
+            if(in_array('attributes', $data)) {
+
+                $request['data']['attributes'] = $data['attributes'];
+            }
+
             $response = $this->request->client->post("{$this->entity}", [
-                'json' => $data,
+                'json' => $request,
                 'headers' => [
 
                     'Content-Type' => 'application/vnd.api+json; charset=utf8',

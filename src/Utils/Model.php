@@ -74,18 +74,26 @@ class Model
 
         return $this->request->handleWithExceptions(function () use ($data) {
 
-            $data = [
+            $request = [
 
                 'data' => [
                     'id' => $this->{$this->primaryKey},
                     'type' => $this->type,
-                    'attributes' => $data['attributes'] ?? [],
-                    'relationships' => $data['relationships'] ?? [],
                 ],
             ];
 
+            if(in_array('relationships', $data)) {
+
+                $request['data']['relationships'] = $data['relationships'];
+            }
+
+            if(in_array('attributes', $data)) {
+
+                $request['data']['attributes'] = $data['attributes'];
+            }
+
             $response = $this->request->client->patch("{$this->entity}/{$this->{$this->primaryKey}}", [
-                'json' => $data,
+                'json' => $request,
             ]);
 
             $responseData = json_decode((string)$response->getBody());
