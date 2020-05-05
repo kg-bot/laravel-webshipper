@@ -94,6 +94,10 @@ class Model
 
             $response = $this->request->client->patch("{$this->entity}/{$this->{$this->primaryKey}}", [
                 'json' => $request,
+                'headers' => [
+
+	                'Content-Type' => 'application/vnd.api+json; charset=utf8',
+                ],
             ]);
 
             $responseData = json_decode((string)$response->getBody());
